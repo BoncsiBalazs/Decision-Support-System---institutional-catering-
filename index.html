@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#126347"><meta name="description" content="Local-first meal-service plate-waste recording compatible with the ZeroWaste research workflow.">
+<title>ZeroWaste Entry | Institutional catering</title>
+<link rel="stylesheet" href="styles.css"><link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site-header"><div class="brand"><div class="brand-icon">ZW</div><div><strong>ZeroWaste Entry</strong><span>Institutional catering • research data collection</span></div></div><span id="storageState" class="storage-state">Local-device storage</span></header>
+<main class="shell">
+<div class="intro"><div><p class="eyebrow">Food waste monitoring</p><h1>Meal-service recording</h1><p>Record served quantities, returned plate waste, staff sensory evaluations and observations. Data stay in this browser until you export them.</p></div><div class="intro-side"><span class="pill">English interface</span><span class="pill">ZeroWaste-compatible export</span></div></div>
+<nav class="tabs" aria-label="Application sections">
+<button class="tab active" type="button" data-tab="entry" aria-current="page">New / edit entry</button>
+<button class="tab" type="button" data-tab="saved">Saved entries <span id="entryCount" class="count">0</span></button>
+<button class="tab" type="button" data-tab="export">Export and backup</button>
+<button class="tab" type="button" data-tab="about">How it works</button>
+</nav>
+<section class="tab-page active" id="panel-entry">
+<form id="entryForm" novalidate>
+<div class="section"><div class="section-heading"><span class="section-number">01</span><div><h2>Meal event details</h2><p>One record covers a soup and/or main course served at one institution on one date to one recipient group.</p></div></div>
+<div class="form-grid">
+<label>Institution / serving site <em>required</em><input required autocomplete="off" name="institution" id="institution" placeholder="e.g. Example Primary School A" maxlength="140"></label>
+<label>Measurement date <em>required</em><input required type="date" name="mealDate" id="mealDate"></label>
+<label>Recipient age group <em>required</em><select required name="ageGroup" id="ageGroup"><option value="">Select an age group</option></select></label>
+<label>Recorder (optional)<input type="text" name="recorder" id="recorder" placeholder="Leave empty if not needed" maxlength="120"></label>
+<label class="full" id="otherAgeGroupWrap" hidden>Other recipient group description <input name="ageGroupOther" maxlength="120"></label>
+</div></div>
+<div id="course-sections"></div>
+<div class="actions"><button type="submit" class="primary">Save entry on this device</button><button type="button" id="newEntry" class="secondary">Start a new entry</button><span id="formStatus" class="action-status" role="status"></span></div>
+</form></section>
+<section class="tab-page" id="panel-saved"><div class="section"><div class="section-heading"><span class="section-number">02</span><div><h2>Saved entries</h2><p>These records are stored only in this browser on this device. Export a backup before clearing browser data.</p></div></div>
+<div class="toolbar"><label class="search-label">Search entries<input id="searchEntries" placeholder="Institution, dish or date"></label><button type="button" class="secondary" id="refreshEntries">Refresh list</button></div>
+<div id="entriesTableWrap" class="table-scroller"></div></div></section>
+<section class="tab-page" id="panel-export"><div class="section"><div class="section-heading"><span class="section-number">03</span><div><h2>Export to ZeroWaste</h2><p>Download an Excel workbook and optional photo files. The workbook retains the original internal import-column identifiers.</p></div></div>
+<div class="export-grid"><div class="export-card"><h3>Excel source workbook</h3><p>Produces <code>raw_entry_events.xlsx</code> with the 60 original data-entry fields. Separate Excel sheets are created for different institutions.</p><button class="primary" type="button" id="downloadExcel">Download Excel</button></div>
+<div class="export-card"><h3>Import-ready ZIP package</h3><p>Packages the same Excel file, a photo manifest and photographs into their original ZeroWaste folder locations.</p><button class="primary" type="button" id="downloadPackage">Download ZIP for ZeroWaste</button></div>
+<div class="export-card"><h3>Private backup</h3><p>Save all local entries and images as JSON, or restore a previously exported backup. Do not upload this private file to a public repository.</p><div class="button-row"><button class="secondary" type="button" id="downloadBackup">Download backup</button><label class="file-button">Restore backup<input type="file" accept=".json,application/json" id="restoreBackup" hidden></label></div></div></div>
+<p class="notice"><strong>Data protection:</strong> GitHub Pages publishes only the website code. Entries are not transmitted to GitHub or a central database by this application. Browser storage is device- and browser-specific; make regular backups.</p>
+<p id="exportStatus" class="action-status" role="status"></p></div></section>
+<section class="tab-page" id="panel-about"><div class="section"><div class="section-heading"><span class="section-number">04</span><div><h2>Method and data compatibility</h2><p>This static entry module is designed for the event-level ZeroWaste workflow used in institutional catering research.</p></div></div>
+<div class="info-grid"><div><h3>Physical measurements</h3><p>Only returned plate waste is measured, in kilograms. Serving temperatures are recorded in degrees Celsius. Enter soups and main courses separately.</p></div><div><h3>Serving quantities</h3><p>Soup quantities are standardised to litres (L), while main-course quantities are standardised to kilograms (kg). Decilitres, decagrams and grams are converted arithmetically. Portion and piece counts require a user-supplied, verified conversion factor; otherwise the standardised quantity is left blank.</p></div><div><h3>Sensory scale</h3><p>Staff rate appearance, odour, taste, texture and overall liking from 1 (very poor) to 5 (very good). These are staff ratings, not individual child questionnaires.</p></div><div><h3>Record linkage</h3><p>The export preserves each event identifier, institution, date, age group, dish names and measurements for integration with separate consumer and menu records in the ZeroWaste R pipeline.</p></div></div>
+<p class="notice"><strong>Scope:</strong> This GitHub Pages site is a local-first data-entry client, not the R/Shiny decision-support dashboard. It does not authenticate respondents, synchronise records between devices or host a secure shared database. Such functions require a separately secured backend.</p>
+</div></section>
+<footer>ZeroWaste Entry · English data-entry module · No data is uploaded automatically</footer>
+</main>
+<script type="module" src="app.js"></script>
+</body></html>
